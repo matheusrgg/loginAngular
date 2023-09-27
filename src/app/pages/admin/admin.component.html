@@ -1,0 +1,50 @@
+<button (click)="onLogout()">Logout</button>
+<h1>Tabela Administrativa de Fornecedores</h1>
+<button>Inserir Novo Fornecedor</button>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Estado</th>
+            <th>Valor</th>
+            <th>Anúncios</th>
+            <th>Ações</th> <!-- New column for actions -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Produto A</td>
+            <td>São Paulo</td>
+            <td>$50.00</td>
+            <td>5</td>
+            <td>
+                <button onclick="editarProduto('Produto A')">Editar</button>
+                <button onclick="deletarProduto('Produto A')">Deletar</button>
+                <button onclick="verAnuncios('Produto A')">Anúncios</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Produto B</td>
+            <td>Rio de Janeiro</td>
+            <td>$35.00</td>
+            <td>3</td>
+            <td>
+                <button onclick="editarProduto('Produto B')">Editar</button>
+                <button onclick="deletarProduto('Produto B')">Deletar</button>
+                <button onclick="verAnuncios('Produto B')">Anúncios</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Produto C</td>
+            <td>Minas Gerais</td>
+            <td>$42.50</td>
+            <td>7</td>
+            <td>
+                <button onclick="editarProduto('Produto C')">Editar</button>
+                <button onclick="deletarProduto('Produto C')">Deletar</button>
+                <button onclick="verAnuncios('Produto C')">Anúncios</button>
+            </td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </tbody>
+</table>
