@@ -1,6 +1,6 @@
 <h1>Login</h1>
 
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div>
         <label for="username">Username:</label>
         <input type="text" id="username" formControlName="username" required><br><br>
@@ -12,7 +12,7 @@
     </div>
 
     <div>
-        <button type="submit" [disabled]="!myForm.valid">Submit</button>
+        <button type="submit" [disabled]="!loginForm.valid">Submit</button>
     </div>
 
 </form>

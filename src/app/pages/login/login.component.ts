@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthStore } from './service/auth.store';
 
 @Component({
   selector: 'app-login',
@@ -9,22 +10,44 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent {
-  myForm: FormGroup = new FormGroup({});
+  loginForm: FormGroup = new FormGroup({});
 
-  constructor(public router: Router, private formBuilder: FormBuilder) { }
+  constructor(
+    public router: Router,
+    private formBuilder: FormBuilder,
+    private auth: AuthStore
+
+  ) { }
 
   ngOnInit() {
-    this.myForm = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
+  // onSubmit() {
+  //   if (this.loginForm.valid) {
+  //     // Handle form submission here
+  //     console.log('Form data submitted:', this.loginForm.value);
+  //     this.router.navigate(["/admin"])
+  //   }
+  // }
+
   onSubmit() {
-    if (this.myForm.valid) {
-      // Handle form submission here
-      console.log('Form data submitted:', this.myForm.value);
-      this.router.navigate(["/admin"])
-    }
+    const val = this.loginForm.value
+    this.auth.login(val.username, val.password)
+      .subscribe({
+        next: () => {
+          this.router.navigate(["/admin"])
+        },
+        error: () => {
+
+          alert("Login Failed!")
+        }
+
+
+      })
   }
+
 }
