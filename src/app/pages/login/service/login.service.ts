@@ -1,72 +1,66 @@
-// import { Injectable } from "@angular/core";
-// import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import jwt_decode from "jwt-decode";
+import { Observable } from "rxjs";
+@Injectable({
+    providedIn: 'root'
+})
+export class LoginService {
 
-// import { Observable } from "rxjs";
-// @Injectable({
-//     providedIn: 'root'
-// })
-// export class LoginService {
-
-//     private encodedToken: string | null = null;
-//     private readonly tokenKey = 'authToken';
-
-
-//     constructor(
-//         public http: HttpClient,
-//     ) {
-//         this.checkExistingToken();
-//     }
-
-//     private checkExistingToken() {
-//         if (sessionStorage.getItem(this.tokenKey)) {
-//             this.encodedToken = sessionStorage.getItem(this.tokenKey);
-//         }
-//     }
-
-//     public saveUser({ email, senha }: any) {
-//         const url = 'http://localhost:4000/admin/login';
-//         return this.http.post<any>(url, {
-//             email: email,
-//             senha: senha
-//         })
-//     }
+    private encodedToken: string | null = null;
+    private readonly tokenKey = 'authToken';
 
 
+    constructor(
+        public http: HttpClient,
+    ) {
+        this.checkExistingToken();
+    }
 
-//     public setToken(encodedToken: string): void {
-//         this.encodedToken = encodedToken;
-//         sessionStorage.setItem(this.tokenKey, encodedToken);
-//     }
+    private checkExistingToken() {
+        if (sessionStorage.getItem(this.tokenKey)) {
+            this.encodedToken = sessionStorage.getItem(this.tokenKey);
+        }
+    }
 
-//     public getToken(): string | null {
-//         return sessionStorage.getItem(this.tokenKey);
-//     }
+    public saveUser({ email, senha }: any) {
+        const url = 'http://localhost:4000/admin/login';
+        return this.http.post<any>(url, {
+            email: email,
+            senha: senha
+        })
+    }
 
-//     public removeToken(): void {
-//         this.encodedToken = null;
-//         sessionStorage.removeItem(this.tokenKey);
-//     }
 
-//     public isLoggedIn(): boolean {
-//         return !!this.getToken();
-//     }
 
-//     public get token() {
-//         return this.encodedToken;
-//     }
+    public setToken(encodedToken: string): void {
+        this.encodedToken = encodedToken;
+        sessionStorage.setItem(this.tokenKey, encodedToken);
+    }
 
-//     public get currentUser() {
+    public getToken(): string | null {
+        return sessionStorage.getItem(this.tokenKey);
+    }
 
-//         if (!this.encodedToken) {
-//             throw Error(`No logged user`)
-//         }
-//         return jwt_decode(this.encodedToken) as IUser;
-//     }
+    public removeToken(): void {
+        this.encodedToken = null;
+        sessionStorage.removeItem(this.tokenKey);
+    }
 
-//     public getUserById(userId: string) {
-//         console.log(userId)
-//         const url = `${environment.APILISTAEMPRESA}/${userId}`;
-//         return this.http.get<any>(url);
-//     }
+    public isLoggedIn(): boolean {
+        return !!this.getToken();
+    }
 
-// }
+    public get token() {
+        return this.encodedToken;
+    }
+
+    public get currentUser() {
+
+        if (!this.encodedToken) {
+            throw Error(`No logged user`)
+        }
+        return jwt_decode(this.encodedToken) as any;
+    }
+
+}

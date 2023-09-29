@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthStore } from './service/auth.store';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent {
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
-    private auth: AuthStore
+    private auth: AuthStore,
+    private loginService: LoginService
 
   ) { }
 
@@ -26,28 +28,25 @@ export class LoginComponent {
     });
   }
 
-  // onSubmit() {
-  //   if (this.loginForm.valid) {
-  //     // Handle form submission here
-  //     console.log('Form data submitted:', this.loginForm.value);
-  //     this.router.navigate(["/admin"])
-  //   }
-  // }
+
 
   onSubmit() {
-    const val = this.loginForm.value
-    this.auth.login(val.username, val.password)
-      .subscribe({
-        next: () => {
-          this.router.navigate(["/admin"])
-        },
-        error: () => {
+    if (this.loginForm.valid) {
+      const val = this.loginForm.value
+      this.auth.login(val.username, val.password)
+        .subscribe({
+          next: (res) => {
+            this.loginService.setToken(res);
+            this.router.navigate(["/admin"])
+          },
+          error: () => {
 
-          alert("Login Failed!")
-        }
+            alert("Login Failed!")
+          }
 
 
-      })
+        })
+    }
   }
 
 }

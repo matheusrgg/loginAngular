@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../login/service/login.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,10 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin.component.sass']
 })
 export class AdminComponent {
-  constructor(public router: Router,) { }
+  constructor(
+    public router: Router,
+    private loginService: LoginService
+  ) { }
 
   onLogout() {
-    console.log("funfa isso");
+    this.loginService.removeToken();
     this.router.navigate(["/login"])
   }
 }
