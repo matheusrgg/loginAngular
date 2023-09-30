@@ -36,10 +36,9 @@ export class FornecedorService {
 
         //OPCAO 2
         {
-            const getTodos: Observable<any[]> =
-                this.http.get<any[]>('http://localhost:4000/fornecedor/list');
+            return this.http.get<any[]>('http://localhost:4000/fornecedor/list');
 
-            return getTodos;
+
         }
 
     }
