@@ -6,6 +6,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'laranja', loadChildren: () => import('./laranja/laranja.module').then(m => m.LaranjaModule) },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

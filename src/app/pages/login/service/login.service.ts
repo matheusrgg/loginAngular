@@ -23,15 +23,6 @@ export class LoginService {
         }
     }
 
-    public saveUser({ email, senha }: any) {
-        const url = 'http://localhost:4000/admin/login';
-        return this.http.post<any>(url, {
-            email: email,
-            senha: senha
-        })
-    }
-
-
 
     public setToken(encodedToken: string): void {
         this.encodedToken = encodedToken;
