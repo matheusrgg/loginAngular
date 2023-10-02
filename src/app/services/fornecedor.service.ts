@@ -35,11 +35,11 @@ export class FornecedorService {
         // return cont
 
         //OPCAO 2
-        {
-            return this.http.get<any[]>('http://localhost:4000/fornecedor/list');
+
+        return this.http.get<any[]>('http://localhost:4000/fornecedor/list');
 
 
-        }
+
 
     }
 

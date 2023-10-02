@@ -1,6 +1,15 @@
 <button (click)="onLogout()">Logout</button>
 <h1>Tabela Administrativa de Fornecedores</h1>
 <button>Inserir Novo Fornecedor</button>
+
+
+
+
+<div *ngFor="let todo of fornecedores$ | async">
+    <h1>{{ todo.name }}</h1>
+</div>
+
+
 <!-- <table border="1">
     <thead>
         <tr>
@@ -48,8 +57,3 @@
 
 </tbody>
 </table> -->
-
-
-<div *ngFor="let todo of fornecedores | async">
-    <h1>{{todo.name}}</h1>
-</div>
