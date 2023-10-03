@@ -1,31 +1,24 @@
-<p>table works!</p>
 <button (click)="onLogout()">Logout</button>
 <h1>Tabela Administrativa de Fornecedores</h1>
 <button>Inserir Novo Fornecedor</button>
 
 
 
-
-<div *ngFor="let todo of fornecedores$ | async">
-    <h1>{{ todo.nome }}</h1>
-</div>
-
-
-<!-- <table border="1">
+<table border="1">
     <thead>
         <tr>
             <th>Nome</th>
-            <th>Estado</th>
-            <th>Valor</th>
+            <th>Cnpj</th>
+            <th>Email</th>
             <th>Anúncios</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Produto A</td>
-            <td>São Paulo</td>
-            <td>$50.00</td>
+        <tr *ngFor="let todo of fornecedores$ | async">
+            <td>{{ todo.nome }}</td>
+            <td>{{todo.cnpj}}</td>
+            <td>{{todo.email}}</td>
             <td>5</td>
             <td>
                 <button onclick="editarProduto('Produto A')">Editar</button>
@@ -33,28 +26,7 @@
                 <button onclick="verAnuncios('Produto A')">Anúncios</button>
             </td>
         </tr>
-        <tr>
-            <td>Produto B</td>
-            <td>Rio de Janeiro</td>
-            <td>$35.00</td>
-            <td>3</td>
-            <td>
-                <button onclick="editarProduto('Produto B')">Editar</button>
-                <button onclick="deletarProduto('Produto B')">Deletar</button>
-                <button onclick="verAnuncios('Produto B')">Anúncios</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Produto C</td>
-            <td>Minas Gerais</td>
-            <td>$42.50</td>
-            <td>7</td>
-            <td>
-                <button onclick="editarProduto('Produto C')">Editar</button>
-                <button onclick="deletarProduto('Produto C')">Deletar</button>
-                <button onclick="verAnuncios('Produto C')">Anúncios</button>
-            </td>
-        </tr>
 
-</tbody>
-</table> -->
+
+    </tbody>
+</table>

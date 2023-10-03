@@ -43,6 +43,6 @@ export class TableComponent implements OnInit {
 
   onLogout() {
     this.loginService.removeToken();
-    this.router.navigate(["/login"])
+    this.router.navigate(["/login/auth"])
   }
 }

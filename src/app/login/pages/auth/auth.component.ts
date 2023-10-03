@@ -39,7 +39,7 @@ export class AuthComponent {
         .subscribe({
           next: (res) => {
             this.loginService.setToken(res);
-            this.router.navigate(["/admin"])
+            this.router.navigate(["/admin/table"])
           },
           error: () => {
 
