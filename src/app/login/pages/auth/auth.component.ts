@@ -1,16 +1,18 @@
 
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthStore } from './service/auth.store';
-import { LoginService } from './service/login.service';
+import { AuthStore } from 'src/app/services/auth.store';
+import { LoginService } from 'src/app/services/login.service';
+
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.sass']
 })
-export class LoginComponent {
+export class AuthComponent {
   loginForm: FormGroup = new FormGroup({});
 
   constructor(
@@ -48,5 +50,4 @@ export class LoginComponent {
         })
     }
   }
-
 }

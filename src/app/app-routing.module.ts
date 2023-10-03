@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
+
 import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+
   { path: 'admin', component: AdminComponent },
-  { path: 'laranja', loadChildren: () => import('./laranja/laranja.module').then(m => m.LaranjaModule) },
-  { path: '**', redirectTo: 'login' },
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
+  { path: '**', redirectTo: 'login/auth' },
 ];
 
 @NgModule({

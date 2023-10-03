@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../login/service/login.service';
+import { LoginService } from '../../services/login.service';
 import { FornecedorService } from 'src/app/services/fornecedor.service';
 import { Observable, tap } from 'rxjs';
 
