@@ -1,15 +1,16 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
+
 import { FornecedorService } from 'src/app/services/fornecedor.service';
 import { Observable, tap } from 'rxjs';
-
+import { LoginService } from 'src/app/services/login.service';
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.sass']
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.sass']
 })
-export class AdminComponent implements OnInit {
+export class TableComponent implements OnInit {
 
   fornecedores$: Observable<any[]>
   // fornecedores!: any[];
