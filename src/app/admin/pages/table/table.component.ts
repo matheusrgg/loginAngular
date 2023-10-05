@@ -13,36 +13,31 @@ import { LoginService } from 'src/app/services/login.service';
 export class TableComponent implements OnInit {
 
   fornecedores$: Observable<any[]>
-  // fornecedores!: any[];
+
   constructor(
     public router: Router,
     private loginService: LoginService,
     private fornecedorSerivce: FornecedorService
   ) {
 
-    this.fornecedores$ = this.fornecedorSerivce.getFornecedor().pipe(
-      tap(() => { console.log("emtroudsfffffffffffffffffffffff") })
-    )
+
   }
 
   ngOnInit(): void {
-    //pq esse da erro?retorna undefined e  o outro usado no projeto da Cathu não
-    //falar dos environments que nessa versão saiu, onde eu vejo e fico sabendo das mudanças das versões
-    //
-    // this.fornecedorSerivce.getFornecedor().subscribe(datas => (this.fornecedores = datas));
-
-
-    //opcao 2 ok
-    // this.fornecedorSerivce.getFornecedor().subscribe(datas => { console.log("cadeeeeeeeeeeee", this.fornecedores = datas) });
-
-    //vou tentar essa
-    this.fornecedorSerivce.getFornecedor().subscribe((data) => {
-      console.log("detnrooo", data);
-    })
+    this.fornecedores$ = this.fornecedorSerivce.getFornecedor()
   }
 
   onLogout() {
     this.loginService.removeToken();
     this.router.navigate(["/login/auth"])
+  }
+
+  onCreateNew() {
+    this.router.navigate(["/admin/form"])
+  }
+
+  onDelete(id: any) {
+    console.log("toc hamadno");
+    this.fornecedorSerivce.deleteFornecedor(id)
   }
 }

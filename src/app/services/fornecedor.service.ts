@@ -7,8 +7,6 @@ import { Observable } from "rxjs";
 })
 export class FornecedorService {
 
-    private encodedToken: string | null = null;
-    private readonly tokenKey = 'authToken';
 
 
     constructor(
@@ -19,29 +17,31 @@ export class FornecedorService {
 
 
 
-    public createFornecedor({ email, senha }: any) {
+
+    public createFornecedor(email, nome, cnpj, descricao): Observable<any[]> {
+        console.log("cheameiiii");
         const url = 'http://localhost:4000/fornecedor/create';
         return this.http.post<any>(url, {
             email: email,
-            senha: senha
+            nome: nome,
+            cnpj: cnpj,
+            descricao: descricao
         })
+
     }
 
     public getFornecedor(): Observable<any[]> {
-        // OPCAO 1
-        // const url = 'http://localhost:4000/fornecedor/list';
-        // const cont = this.http.get<any>(url)
-        // console.log("teste", cont);
-        // return cont
-
-        //OPCAO 2
-
         return this.http.get<any[]>('http://localhost:4000/fornecedor/list');
 
+    }
 
-
+    public deleteFornecedor(id: any): Observable<any[]> {
+        console.log("to entrando", id);
+        return this.http.delete<any[]>(`http://localhost:4000/fornecedor/delete/${id}`);
 
     }
+
+
 
 
 
