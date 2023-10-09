@@ -35,7 +35,7 @@ export class AuthStore {
             username: username,
             password: password
         }
-
+            //pq eu fiz isso?
         ).pipe(
             tap(user => this.subject.next(user)),
             shareReplay()

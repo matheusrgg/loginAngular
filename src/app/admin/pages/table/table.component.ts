@@ -24,7 +24,8 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fornecedores$ = this.fornecedorSerivce.getFornecedor()
+    this.fornecedorSerivce.getFornecedor()
+    this.fornecedores$ = this.fornecedorSerivce.table$
   }
 
   onLogout() {
@@ -38,6 +39,11 @@ export class TableComponent implements OnInit {
 
   onDelete(id: any) {
     console.log("toc hamadno");
+    //esse eu preciso dar um subscribe ?
     this.fornecedorSerivce.deleteFornecedor(id)
+  }
+
+  onEdit(id: any) {
+    this.router.navigate(["/admin/form", id])
   }
 }

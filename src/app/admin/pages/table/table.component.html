@@ -27,7 +27,7 @@
                 <td>{{todo.email}}</td>
                 <td>5</td>
                 <td>
-                    <button class="btn btn-primary mx-2">Editar</button>
+                    <button class="btn btn-primary mx-2" (click)="onEdit(todo.id)">Editar</button>
                     <button class="btn btn-danger mx-2" (click)="onDelete(todo.id)">Deletar</button>
                     <button class="btn btn-info mx-2">Anúncios</button>
 

@@ -1,12 +1,20 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import jwt_decode from "jwt-decode";
-import { Observable } from "rxjs";
+import { Observable, Subject, takeUntil } from "rxjs";
+
 @Injectable({
     providedIn: 'root'
 })
 export class FornecedorService {
 
+    //mudar nome aqui
+    private table = new Subject<any>();
+
+
+    // private aprendendoTakeUntil = new Subject<any>();
+    private getUnsubsribe$ = new Subject<void>();
+    private deleteUnsubsribe$ = new Subject<void>();
 
 
     constructor(
@@ -16,12 +24,18 @@ export class FornecedorService {
     }
 
 
+    public setTable(value: any) {
+        this.table.next(value);
+    }
+
+    public get table$() {
+        return this.table.asObservable();
+    }
+
 
 
     public createFornecedor(email, nome, cnpj, descricao): Observable<any[]> {
-        console.log("cheameiiii");
-        const url = 'http://localhost:4000/fornecedor/create';
-        return this.http.post<any>(url, {
+        return this.http.post<any>('http://localhost:4000/fornecedor/create', {
             email: email,
             nome: nome,
             cnpj: cnpj,
@@ -30,15 +44,43 @@ export class FornecedorService {
 
     }
 
-    public getFornecedor(): Observable<any[]> {
-        return this.http.get<any[]>('http://localhost:4000/fornecedor/list');
+    // public getFornecedor(): Observable<any[]> {
+    //com o void é a Arquitura Push Based- trabalhando com um estado 
+    public getFornecedor(): void {
+        //cancelando qlqr subscription pendente
+        this.getUnsubsribe$.next()
+
+        //criei o observable
+        const request$ = this.http.get<any[]>('http://localhost:4000/fornecedor/list')
+
+        //fiz o subsribe
+        request$
+            .pipe(takeUntil(this.getUnsubsribe$))
+            .subscribe((data) => {
+
+                this.setTable(data)
+            })
 
     }
 
-    public deleteFornecedor(id: any): Observable<any[]> {
-        console.log("to entrando", id);
-        return this.http.delete<any[]>(`http://localhost:4000/fornecedor/delete/${id}`);
+    public deleteFornecedor(id: any): void {
+        this.deleteUnsubsribe$.next()
+        const request$ = this.http.delete<any[]>(`http://localhost:4000/fornecedor/delete/${id}`);
+        request$
+            .pipe(takeUntil(this.deleteUnsubsribe$))
+            .subscribe((data) => {
+                this.getFornecedor()
+            })
+    }
 
+
+    public updateFornecedor(id, email, nome, cnpj, descricao): Observable<any[]> {
+        return this.http.put<any>(`http://localhost:4000/fornecedor/update/${id}`, {
+            email: email,
+            nome: nome,
+            cnpj: cnpj,
+            descricao: descricao
+        })
     }
 
 

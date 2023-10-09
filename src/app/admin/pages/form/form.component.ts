@@ -2,7 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthStore } from 'src/app/services/auth.store';
 import { FornecedorService } from 'src/app/services/fornecedor.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -14,12 +14,13 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./form.component.sass']
 })
 export class FormComponent {
-
+  id: any;
 
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
     private auth: AuthStore,
+    private route: ActivatedRoute,
     private fornecedorService: FornecedorService
 
   ) { }
@@ -29,6 +30,7 @@ export class FormComponent {
 
 
   ngOnInit() {
+    this.carregarIdRota()
     this.fornecedorForm = this.formBuilder.group({
       nome: ['', Validators.required],
       email: [null, [Validators.required, Validators.email]],
@@ -62,6 +64,13 @@ export class FormComponent {
   }
 
 
+  carregarIdRota() {
+    this.route.paramMap.subscribe((params: any) => {
+      this.id = params.get('id')
+      console.log("id  vindoo da rottaa", this.id);
+    });
+
+  }
 
 
 
