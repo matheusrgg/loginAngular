@@ -14,7 +14,9 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./form.component.sass']
 })
 export class FormComponent {
-  id: any;
+  id: number;
+
+
 
   constructor(
     public router: Router,
@@ -27,10 +29,15 @@ export class FormComponent {
 
   fornecedorForm: FormGroup = new FormGroup({});
 
-
-
   ngOnInit() {
     this.carregarIdRota()
+
+    this.fornecedorService.mapFornecedorGetIdTentaiva2(this.id).subscribe((data) => {
+
+
+      console.log("acessando o getByID Tentativa 2 DENTROO DO COMPONENT", data);
+    })
+
     this.fornecedorForm = this.formBuilder.group({
       nome: ['', Validators.required],
       email: [null, [Validators.required, Validators.email]],
@@ -46,15 +53,12 @@ export class FormComponent {
       this.fornecedorService.createFornecedor(val.email, val.nome, val.cnpj, val.descricao)
         .subscribe({
           next: (res) => {
-
             this.router.navigate(["/admin/table"])
           },
           error: () => {
 
             alert("Login Failed!")
           }
-
-
         })
     }
   }
@@ -63,14 +67,13 @@ export class FormComponent {
     this.router.navigate(["/admin/table"])
   }
 
-
   carregarIdRota() {
     this.route.paramMap.subscribe((params: any) => {
       this.id = params.get('id')
       console.log("id  vindoo da rottaa", this.id);
     });
-
   }
+
 
 
 

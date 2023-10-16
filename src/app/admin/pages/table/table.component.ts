@@ -18,10 +18,7 @@ export class TableComponent implements OnInit {
     public router: Router,
     private loginService: LoginService,
     private fornecedorSerivce: FornecedorService
-  ) {
-
-
-  }
+  ) { }
 
   ngOnInit(): void {
     this.fornecedorSerivce.getFornecedor()
@@ -33,13 +30,11 @@ export class TableComponent implements OnInit {
     this.router.navigate(["/login/auth"])
   }
 
-  onCreateNew() {
+  onCreate() {
     this.router.navigate(["/admin/form"])
   }
 
   onDelete(id: any) {
-    console.log("toc hamadno");
-    //esse eu preciso dar um subscribe ?
     this.fornecedorSerivce.deleteFornecedor(id)
   }
 
